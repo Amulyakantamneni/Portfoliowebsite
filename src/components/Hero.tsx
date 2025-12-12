@@ -107,7 +107,7 @@ export function Hero() {
             className="text-5xl sm:text-7xl lg:text-8xl text-slate-900 mb-6 tracking-tight"
           >
             <span className="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 bg-clip-text text-transparent font-bold">
-              Amulya Kantamneni
+              Amulya Kantamaneni
             </span>
           </motion.h1>
 
