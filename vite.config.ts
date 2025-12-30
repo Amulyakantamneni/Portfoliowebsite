@@ -12,7 +12,7 @@ export default defineConfig({
   },
   build: {
     target: "esnext",
-    outDir: "dist", // ✅ Vercel expects dist for Vite (default)
+    outDir: "build",
   },
   server: {
     port: 3000,
