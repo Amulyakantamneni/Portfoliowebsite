@@ -1,17 +1,14 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { Menu, X } from "lucide-react";
-
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Experience from "./components/Experience";
-import Impact from "./components/Impact";
-import Projects from "./components/Projects";
-import Contact from "./components/Contact";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import About from "@/components/About";
+import Experience from "@/components/Experience";
+import Impact from "@/components/Impact";
+import Projects from "@/components/Projects";
+import Contact from "@/components/Contact";
 
 export default function App() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background text-foreground">
       <Header />
 
       <main>
@@ -19,23 +16,23 @@ export default function App() {
           <Hero />
         </section>
 
-        <section id="about">
+        <section id="about" className="scroll-mt-24">
           <About />
         </section>
 
-        <section id="experience">
+        <section id="experience" className="scroll-mt-24">
           <Experience />
         </section>
 
-        <section id="impact">
+        <section id="impact" className="scroll-mt-24">
           <Impact />
         </section>
 
-        <section id="projects">
+        <section id="projects" className="scroll-mt-24">
           <Projects />
         </section>
 
-        <section id="contact">
+        <section id="contact" className="scroll-mt-24">
           <Contact />
         </section>
       </main>
