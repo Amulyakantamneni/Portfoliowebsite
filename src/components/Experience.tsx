@@ -7,61 +7,6 @@ import { useState } from "react";
 export function Experience() {
   const [activeTab, setActiveTab] = useState(0);
 
-  // Handle resume download (fixed)
-  const handleDownloadResume = (e?: React.MouseEvent<HTMLButtonElement>) => {
-    e?.preventDefault();
-
-    // Create a simple text-based resume
-    const resumeContent = `
-AMULYA KANTAMNENI
-AI/ML Engineer
-Email: amulya.kantamneni@gmail.com
-LinkedIn: linkedin.com/in/amulyachk
-GitHub: github.com/Amulyakantamneni
-
-EXPERIENCE
-
-PayPal | AI / Machine Learning Engineer
-2024 – Present | San Jose, CA
-• Designed and deployed full-stack LLM pipelines for enterprise financial document understanding, including data preprocessing, embedding generation, vector indexing, and multi-step reasoning workflows.
-• Developed optimized Retrieval-Augmented Generation (RAG) systems using OpenAI, LangChain, FAISS, and Pinecone, improving retrieval relevance by 50% and reducing hallucinations through hybrid semantic + rule-based rankers.
-• Built a multi-agent knowledge assistant for internal engineering teams with autonomous task planning, context linking, and tool-use capabilities—reducing manual documentation lookup time by 70%.
-• Engineered latency-optimized inference services using FastAPI, async workers, a batching engine, and response streaming; achieved 3× throughput under peak load while cutting P95 latency by 40%.
-• Productionized NLP classification and summarization models using Docker, Kubernetes, Helm, and fully managed CI/CD through GitHub Actions and ArgoCD.
-• Implemented evaluation pipelines for prompt quality, retrieval accuracy, toxicity safety checks, and regression detection using Weights & Biases and custom dashboards.
-• Built internal tools for prompt versioning, data labeling, and dataset quality checks, enabling 4+ teams to rapidly iterate on LLM features.
-• Designed monitoring for model drift, embedding integrity, vector DB health and created automated fallback strategies to maintain reliability in distributed environments.
-
-Accenture | AI Engineer (NLP & GenAI)
-2022 – 2023 | Hyderabad, India
-• Led development of Generative AI automation suites for banking, insurance, and retail domains, including summarization engines, classification models, query routing, and knowledge retrieval systems.
-• Built RAG prototypes integrating LangChain, HuggingFace embeddings, and vector databases (FAISS, Qdrant) that reduced client search time by 60–80%.
-• Designed domain-adapted LLM pipelines with custom prompt frameworks, system instructions, and fine-tuned adapters for high-accuracy field extraction.
-• Built secure API-driven AI microservices using FastAPI, JWT auth, rate limiting, and observability tooling for deployment in multi-tenant enterprise environments.
-• Integrated AI systems into client cloud stacks using AWS Lambda, ECS Fargate, CloudWatch, DynamoDB, and S3, ensuring fault-tolerant delivery.
-• Collaborated directly with client engineering teams to transform business workflows into AI-ready pipelines, automating repetitive processes and saving thousands of human-hours.
-• Implemented evaluation harnesses using Bleu/ROUGE metrics, embedding similarity scoring, and human feedback tools for iterative LLM improvement.
-`.trim();
-
-    // Create a blob and download it
-    const blob = new Blob([resumeContent], { type: "text/plain;charset=utf-8" });
-    const url = window.URL.createObjectURL(blob);
-
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "Amulya_Kantamneni_Resume.txt";
-    link.style.display = "none";
-
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    // Delay revoke (important for Safari and some browsers)
-    setTimeout(() => {
-      window.URL.revokeObjectURL(url);
-    }, 1000);
-  };
-
   const experiences = [
     {
       company: "PayPal",
@@ -114,8 +59,7 @@ Accenture | AI Engineer (NLP & GenAI)
             <div>
               <div className="flex items-center gap-4 mb-4">
                 <h2 className="text-4xl sm:text-5xl text-slate-900">
-                  Experience
-                  <span className="text-blue-600">.</span>
+                  Experience<span className="text-blue-600">.</span>
                 </h2>
                 <div className="flex-1 h-px bg-gradient-to-r from-blue-600/50 to-transparent" />
               </div>
@@ -124,17 +68,19 @@ Accenture | AI Engineer (NLP & GenAI)
               </p>
             </div>
 
-            {/* Resume Download (fixed: button instead of anchor) */}
-            <motion.button
-              type="button"
-              onClick={handleDownloadResume}
+            {/* Resume Download (downloads /public/Amulya_Kantamneni_Resume.pdf) */}
+            <motion.a
+              href="/Amulya_Kantamneni_Resume.pdf"
+              download="Amulya_Kantamneni_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:shadow-xl hover:shadow-blue-500/50 transition-all"
             >
               <Download size={18} />
               <span>Download Resume</span>
-            </motion.button>
+            </motion.a>
           </div>
         </motion.div>
 
@@ -205,12 +151,14 @@ Accenture | AI Engineer (NLP & GenAI)
                   </div>
                   <span className="font-medium">{experiences[activeTab].company}</span>
                 </div>
+
                 <div className="flex items-center gap-2">
                   <div className="p-1.5 bg-blue-50 rounded-lg">
                     <Calendar size={14} className="text-blue-600" />
                   </div>
                   <span>{experiences[activeTab].period}</span>
                 </div>
+
                 <div className="flex items-center gap-2">
                   <div className="p-1.5 bg-blue-50 rounded-lg">
                     <MapPin size={14} className="text-blue-600" />
@@ -233,9 +181,7 @@ Accenture | AI Engineer (NLP & GenAI)
                   <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center text-white font-semibold text-sm shadow-lg group-hover:scale-110 transition-transform">
                     {index + 1}
                   </div>
-                  <p className="text-slate-700 leading-relaxed flex-1 pt-1">
-                    {item}
-                  </p>
+                  <p className="text-slate-700 leading-relaxed flex-1 pt-1">{item}</p>
                 </motion.div>
               ))}
             </div>
