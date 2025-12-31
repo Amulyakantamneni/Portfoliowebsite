@@ -4,21 +4,15 @@ import path from "path";
 
 export default defineConfig({
   plugins: [react()],
-
-  // Vercel should use "/" base (GitHub Pages uses "/repo-name/")
-  base: "/",
-
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
-
   build: {
     target: "esnext",
-    outDir: "build",
+    outDir: "dist",
   },
-
   server: {
     port: 3000,
     open: true,
