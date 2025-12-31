@@ -1,8 +1,6 @@
-@import "tailwindcss";
-
-/* Optional (Tailwind v4): helps Tailwind detect classes reliably */
-@source "../index.html";
-@source "./**/*.{js,ts,jsx,tsx}";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Design tokens / shadcn-style CSS variables */
 :root {
@@ -74,7 +72,6 @@
   --ring: oklch(0.708 0 0);
 }
 
-/* Base page defaults (safe even if you don’t use shadcn classes) */
 html,
 body {
   font-size: var(--font-size);
