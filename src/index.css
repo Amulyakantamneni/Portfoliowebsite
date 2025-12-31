@@ -5,65 +5,81 @@
 @source "./**/*.{js,ts,jsx,tsx}";
 
 /* ===== Design tokens (keep) ===== */
-:root{
-  --background:#fff;
-  --foreground:oklch(.145 0 0);
-  --card:#fff;
-  --card-foreground:oklch(.145 0 0);
-  --popover:oklch(1 0 0);
-  --popover-foreground:oklch(.145 0 0);
-  --primary:#030213;
-  --primary-foreground:oklch(1 0 0);
-  --secondary:oklch(.95 .0058 264.53);
-  --secondary-foreground:#030213;
-  --muted:#ececf0;
-  --muted-foreground:#717182;
-  --accent:#e9ebef;
-  --accent-foreground:#030213;
-  --destructive:#d4183d;
-  --destructive-foreground:#fff;
-  --border:#0000001a;
-  --input:transparent;
-  --input-background:#f3f3f5;
-  --switch-background:#cbced4;
-  --ring:oklch(.708 0 0);
-  --radius:.625rem;
+:root {
+  --background: #fff;
+  --foreground: oklch(.145 0 0);
+  --card: #fff;
+  --card-foreground: oklch(.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(.145 0 0);
+  --primary: #030213;
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(.95 .0058 264.53);
+  --secondary-foreground: #030213;
+  --muted: #ececf0;
+  --muted-foreground: #717182;
+  --accent: #e9ebef;
+  --accent-foreground: #030213;
+  --destructive: #d4183d;
+  --destructive-foreground: #fff;
+  --border: #0000001a;
+  --input: transparent;
+  --input-background: #f3f3f5;
+  --switch-background: #cbced4;
+  --ring: oklch(.708 0 0);
+  --radius: .625rem;
 }
 
-.dark{
-  --background:oklch(.145 0 0);
-  --foreground:oklch(.985 0 0);
-  --card:oklch(.145 0 0);
-  --card-foreground:oklch(.985 0 0);
-  --popover:oklch(.145 0 0);
-  --popover-foreground:oklch(.985 0 0);
-  --primary:oklch(.985 0 0);
-  --primary-foreground:oklch(.205 0 0);
-  --secondary:oklch(.269 0 0);
-  --secondary-foreground:oklch(.985 0 0);
-  --muted:oklch(.269 0 0);
-  --muted-foreground:oklch(.708 0 0);
-  --accent:oklch(.269 0 0);
-  --accent-foreground:oklch(.985 0 0);
-  --destructive:oklch(.396 .141 25.723);
-  --destructive-foreground:oklch(.985 0 0);
-  --border:oklch(.269 0 0);
-  --input:oklch(.269 0 0);
-  --input-background:oklch(.205 0 0);
-  --switch-background:oklch(.269 0 0);
-  --ring:oklch(.708 0 0);
+.dark {
+  --background: oklch(.145 0 0);
+  --foreground: oklch(.985 0 0);
+  --card: oklch(.145 0 0);
+  --card-foreground: oklch(.985 0 0);
+  --popover: oklch(.145 0 0);
+  --popover-foreground: oklch(.985 0 0);
+  --primary: oklch(.985 0 0);
+  --primary-foreground: oklch(.205 0 0);
+  --secondary: oklch(.269 0 0);
+  --secondary-foreground: oklch(.985 0 0);
+  --muted: oklch(.269 0 0);
+  --muted-foreground: oklch(.708 0 0);
+  --accent: oklch(.269 0 0);
+  --accent-foreground: oklch(.985 0 0);
+  --destructive: oklch(.396 .141 25.723);
+  --destructive-foreground: oklch(.985 0 0);
+  --border: oklch(.269 0 0);
+  --input: oklch(.269 0 0);
+  --input-background: oklch(.205 0 0);
+  --switch-background: oklch(.269 0 0);
+  --ring: oklch(.708 0 0);
 }
 
-/* ===== Base styling (add) ===== */
-html, body, #root { height: 100%; }
+/* ===== Base styling (professional defaults) ===== */
+html,
+body,
+#root {
+  height: 100%;
+}
 
-body{
+body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Minimal professional backdrop (subtle, not childish)*
+/* ===== Minimal professional background ===== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(900px 600px at 10% 10%, rgba(99, 102, 241, .10), transparent 60%),
+    radial-gradient(700px 500px at 85% 15%, rgba(16, 185, 129, .08), transparent 60%),
+    radial-gradient(900px 600px at 50% 90%, rgba(0, 0, 0, .06), transparent 55%);
+}
