@@ -25,32 +25,6 @@ export function Projects() {
 
   const projects: Project[] = [
     {
-      title: 'Emotional Wellness Companion — Your AI BFF',
-      description:
-        'AI-powered mental wellness companion designed to provide emotional support through a calming, human-first experience.',
-      tags: ['Next.js', 'React', 'Tailwind', 'UX Design'],
-      github: 'https://github.com/Amulyakantamneni/Connect-Mate--Mental-Wellness-Companion',
-      demo: 'https://connect-mate-mental-wellness-compan.vercel.app',
-      image:
-        'https://images.unsplash.com/photo-1595623654300-b27329804025?auto=format&fit=crop&w=1080&q=80',
-      featured: true,
-      details: {
-        problem:
-          'Many mental health apps feel clinical and intimidating, reducing long-term user engagement. Users need accessible, judgment-free emotional support.',
-        solution:
-          'Designed a gentle, empathy-driven interface that lowers emotional barriers and feels supportive rather than diagnostic. Built with accessibility and psychological safety as core principles.',
-        features: [
-          'Calming UI with empathy-driven design and soothing color palette',
-          'Mobile-first responsive layout for accessibility anywhere',
-          'Human-like conversational flow with gentle language patterns',
-          'Production deployment with performance optimization',
-          'Privacy-first architecture with no data persistence',
-        ],
-        learnings:
-          'Learned to design technology with emotional safety, accessibility, and psychology in mind. Gained deep insights into UX design for sensitive applications and the importance of human-centered AI.',
-      },
-    },
-    {
       title: 'AI Multi-format Writer',
       description:
         'Production-ready AI writing platform supporting multiple formats with fast, human-like responses and intelligent content generation.',
@@ -75,6 +49,32 @@ export function Projects() {
         ],
         learnings:
           'Gained deep experience optimizing LLM latency, implementing streaming architectures, and improving human-like outputs through advanced prompt engineering techniques.',
+      },
+    },
+    {
+      title: 'Emotional Wellness Companion — Your AI BFF',
+      description:
+        'AI-powered mental wellness companion designed to provide emotional support through a calming, human-first experience.',
+      tags: ['Next.js', 'React', 'Tailwind', 'UX Design'],
+      github: 'https://github.com/Amulyakantamneni/Connect-Mate--Mental-Wellness-Companion',
+      demo: 'https://connect-mate-mental-wellness-compan.vercel.app',
+      image:
+        'https://images.unsplash.com/photo-1595623654300-b27329804025?auto=format&fit=crop&w=1080&q=80',
+      featured: true,
+      details: {
+        problem:
+          'Many mental health apps feel clinical and intimidating, reducing long-term user engagement. Users need accessible, judgment-free emotional support.',
+        solution:
+          'Designed a gentle, empathy-driven interface that lowers emotional barriers and feels supportive rather than diagnostic. Built with accessibility and psychological safety as core principles.',
+        features: [
+          'Calming UI with empathy-driven design and soothing color palette',
+          'Mobile-first responsive layout for accessibility anywhere',
+          'Human-like conversational flow with gentle language patterns',
+          'Production deployment with performance optimization',
+          'Privacy-first architecture with no data persistence',
+        ],
+        learnings:
+          'Learned to design technology with emotional safety, accessibility, and psychology in mind. Gained deep insights into UX design for sensitive applications and the importance of human-centered AI.',
       },
     },
   ];
