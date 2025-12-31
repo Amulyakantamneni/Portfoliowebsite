@@ -1,4 +1,7 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 
 /* Optional (Tailwind v4 sources). Keep if you want. */
 @source "../index.html";
