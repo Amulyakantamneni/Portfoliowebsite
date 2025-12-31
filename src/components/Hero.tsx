@@ -9,7 +9,6 @@ export function Hero() {
     >
       {/* Background */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        {/* Soft gradient blobs (more subtle) */}
         <motion.div
           animate={{ scale: [1, 1.15, 1], rotate: [0, 45, 0] }}
           transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
@@ -21,10 +20,8 @@ export function Hero() {
           className="absolute -bottom-56 -right-56 h-[560px] w-[560px] rounded-full blur-3xl bg-gradient-to-r from-purple-400/15 to-pink-400/15"
         />
 
-        {/* Subtle grid */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a10_1px,transparent_1px),linear-gradient(to_bottom,#0f172a10_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_45%,#000_70%,transparent_100%)]" />
 
-        {/* Light vignette */}
         <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-white/40 to-white/80 dark:from-black/10 dark:via-black/30 dark:to-black/60" />
       </div>
 
@@ -90,4 +87,105 @@ export function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mx-auto mb-10 max-w-3xl text-base leading-rel
+            className="mx-auto mb-10 max-w-3xl text-base leading-relaxed text-slate-600 sm:text-lg"
+          >
+            I build LLM-powered products end-to-end—retrieval & evaluation, backend APIs, and reliable deployments—
+            focused on measurable impact and clean engineering.
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.25 }}
+            className="mb-12 flex flex-col items-center justify-center gap-3 sm:flex-row"
+          >
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() =>
+                document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-7 py-3.5 font-semibold text-white shadow-lg shadow-blue-600/20 transition"
+            >
+              <Rocket size={18} />
+              <span>View Projects</span>
+              <motion.span
+                aria-hidden="true"
+                animate={{ x: [0, 4, 0] }}
+                transition={{ duration: 1.6, repeat: Infinity }}
+                className="ml-1"
+              >
+                →
+              </motion.span>
+            </motion.button>
+
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() =>
+                document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="inline-flex items-center justify-center rounded-xl border-2 border-slate-200 bg-white/80 px-7 py-3.5 font-semibold text-slate-700 shadow-sm backdrop-blur-md transition hover:border-blue-300 hover:bg-white"
+            >
+              Let&apos;s Connect
+            </motion.button>
+          </motion.div>
+
+          {/* Social */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mb-10 flex items-center justify-center gap-3"
+          >
+            <a
+              href="https://github.com/Amulyakantamneni"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="rounded-xl border-2 border-slate-200 bg-white/80 p-3 text-slate-700 shadow-sm backdrop-blur-md transition hover:-translate-y-0.5 hover:border-blue-300 hover:bg-white hover:text-blue-600"
+            >
+              <Github size={22} />
+            </a>
+
+            <a
+              href="https://linkedin.com/in/amulyachk"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="rounded-xl border-2 border-slate-200 bg-white/80 p-3 text-slate-700 shadow-sm backdrop-blur-md transition hover:-translate-y-0.5 hover:border-blue-300 hover:bg-white hover:text-blue-600"
+            >
+              <Linkedin size={22} />
+            </a>
+
+            <a
+              href="mailto:amulya.kantamneni@gmail.com"
+              aria-label="Email"
+              className="rounded-xl border-2 border-slate-200 bg-white/80 p-3 text-slate-700 shadow-sm backdrop-blur-md transition hover:-translate-y-0.5 hover:border-blue-300 hover:bg-white hover:text-blue-600"
+            >
+              <Mail size={22} />
+            </a>
+          </motion.div>
+
+          {/* Scroll hint */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          >
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="flex flex-col items-center gap-2"
+            >
+              <span className="text-sm font-medium text-slate-500">Scroll</span>
+              <ArrowDown className="text-blue-600" size={24} />
+            </motion.div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
