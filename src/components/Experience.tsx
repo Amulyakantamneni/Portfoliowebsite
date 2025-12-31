@@ -1,19 +1,17 @@
+```tsx
 "use client";
 
 import { motion } from "motion/react";
-import {
-  Briefcase,
-  Calendar,
-  Download,
-  MapPin,
-} from "lucide-react";
+import { Briefcase, Calendar, Download, MapPin } from "lucide-react";
 import { useState } from "react";
 
 export function Experience() {
   const [activeTab, setActiveTab] = useState(0);
 
-  // Handle resume download
-  const handleDownloadResume = () => {
+  // Handle resume download (fixed)
+  const handleDownloadResume = (e?: React.MouseEvent<HTMLButtonElement>) => {
+    e?.preventDefault();
+
     // Create a simple text-based resume
     const resumeContent = `
 AMULYA KANTAMNENI
@@ -47,53 +45,57 @@ Accenture | AI Engineer (NLP & GenAI)
 `.trim();
 
     // Create a blob and download it
-    const blob = new Blob([resumeContent], {
-      type: "text/plain",
-    });
+    const blob = new Blob([resumeContent], { type: "text/plain;charset=utf-8" });
     const url = window.URL.createObjectURL(blob);
+
     const link = document.createElement("a");
     link.href = url;
     link.download = "Amulya_Kantamneni_Resume.txt";
+    link.style.display = "none";
+
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    window.URL.revokeObjectURL(url);
+
+    // Delay revoke (important for Safari and some browsers)
+    setTimeout(() => {
+      window.URL.revokeObjectURL(url);
+    }, 1000);
   };
 
   const experiences = [
-  {
-    company: "PayPal",
-    position: "AI Engineer",
-    period: "2024 – Present",
-    location: "San Jose, CA",
-    description: [
-      "Owned end-to-end development of LLM-powered document understanding features (ingestion → chunking → embeddings → vector indexing → orchestration → UI/API integration).",
-      "Built Retrieval-Augmented Generation (RAG) workflows with hybrid retrieval (dense + keyword), reranking, and grounded prompting to improve answer relevance and reduce hallucinations.",
-      "Designed scalable inference services with FastAPI, async workers, caching, and streaming responses; tuned batching and request concurrency to improve throughput and reduce P95 latency.",
-      "Implemented evaluation & regression testing for prompts and retrieval (golden sets, win-rate comparisons, citation checks, safety filters) to prevent quality drops across releases.",
-      "Productionized NLP/LLM pipelines using Docker and Kubernetes and automated releases with CI/CD; added observability (logs/metrics/traces) for reliable on-call debugging.",
-      "Collaborated with product and platform teams to convert prototypes into shippable features, define success metrics, and iterate using user feedback and error analysis.",
-      "Built internal tooling for prompt/version management and data quality checks, enabling faster iteration across multiple teams and reducing manual debugging cycles.",
-      "Hardened systems with fallback strategies (retry policies, retrieval backoff, deterministic templates) to maintain reliability during partial outages and noisy inputs.",
-    ],
-  },
-  {
-    company: "Accenture",
-    position: "AI Engineer (GenAI)",
-    period: "2022 – 2023",
-    location: "Hyderabad, India",
-    description: [
-      "Delivered NLP and GenAI solutions for enterprise clients across banking and insurance—information extraction, classification, summarization, and semantic search.",
-      "Built transformer-based pipelines (tokenization, training/inference, post-processing) and improved quality through prompt tuning, thresholding, and error-driven iterations.",
-      "Developed early RAG prototypes using LangChain/Hugging Face embeddings with FAISS/Qdrant, improving internal knowledge lookup speed and reducing manual search effort.",
-      "Implemented secure AI microservices (FastAPI) with authentication, rate limiting, and structured logging to support multi-tenant deployments and audit requirements.",
-      "Integrated models into client cloud environments (AWS services like Lambda/ECS/S3/CloudWatch), supporting stable rollouts and operational monitoring.",
-      "Created reusable data preprocessing and labeling workflows to improve dataset consistency, reduce noise, and speed up experimentation cycles.",
-      "Partnered with client engineering teams to translate business workflows into ML-ready pipelines and ship production features under tight timelines.",
-    ],
-  },
-];
-
+    {
+      company: "PayPal",
+      position: "AI Engineer",
+      period: "2024 – Present",
+      location: "San Jose, CA",
+      description: [
+        "Owned end-to-end development of LLM-powered document understanding features (ingestion → chunking → embeddings → vector indexing → orchestration → UI/API integration).",
+        "Built Retrieval-Augmented Generation (RAG) workflows with hybrid retrieval (dense + keyword), reranking, and grounded prompting to improve answer relevance and reduce hallucinations.",
+        "Designed scalable inference services with FastAPI, async workers, caching, and streaming responses; tuned batching and request concurrency to improve throughput and reduce P95 latency.",
+        "Implemented evaluation & regression testing for prompts and retrieval (golden sets, win-rate comparisons, citation checks, safety filters) to prevent quality drops across releases.",
+        "Productionized NLP/LLM pipelines using Docker and Kubernetes and automated releases with CI/CD; added observability (logs/metrics/traces) for reliable on-call debugging.",
+        "Collaborated with product and platform teams to convert prototypes into shippable features, define success metrics, and iterate using user feedback and error analysis.",
+        "Built internal tooling for prompt/version management and data quality checks, enabling faster iteration across multiple teams and reducing manual debugging cycles.",
+        "Hardened systems with fallback strategies (retry policies, retrieval backoff, deterministic templates) to maintain reliability during partial outages and noisy inputs.",
+      ],
+    },
+    {
+      company: "Accenture",
+      position: "AI Engineer (GenAI)",
+      period: "2022 – 2023",
+      location: "Hyderabad, India",
+      description: [
+        "Delivered NLP and GenAI solutions for enterprise clients across banking and insurance—information extraction, classification, summarization, and semantic search.",
+        "Built transformer-based pipelines (tokenization, training/inference, post-processing) and improved quality through prompt tuning, thresholding, and error-driven iterations.",
+        "Developed early RAG prototypes using LangChain/Hugging Face embeddings with FAISS/Qdrant, improving internal knowledge lookup speed and reducing manual search effort.",
+        "Implemented secure AI microservices (FastAPI) with authentication, rate limiting, and structured logging to support multi-tenant deployments and audit requirements.",
+        "Integrated models into client cloud environments (AWS services like Lambda/ECS/S3/CloudWatch), supporting stable rollouts and operational monitoring.",
+        "Created reusable data preprocessing and labeling workflows to improve dataset consistency, reduce noise, and speed up experimentation cycles.",
+        "Partnered with client engineering teams to translate business workflows into ML-ready pipelines and ship production features under tight timelines.",
+      ],
+    },
+  ];
 
   return (
     <section
@@ -123,9 +125,9 @@ Accenture | AI Engineer (NLP & GenAI)
               </p>
             </div>
 
-            {/* Resume Download */}
-            <motion.a
-              href="#"
+            {/* Resume Download (fixed: button instead of anchor) */}
+            <motion.button
+              type="button"
               onClick={handleDownloadResume}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -133,7 +135,7 @@ Accenture | AI Engineer (NLP & GenAI)
             >
               <Download size={18} />
               <span>Download Resume</span>
-            </motion.a>
+            </motion.button>
           </div>
         </motion.div>
 
@@ -160,26 +162,20 @@ Accenture | AI Engineer (NLP & GenAI)
                 <div className="flex items-start gap-3">
                   <div
                     className={`p-2 rounded-lg ${
-                      activeTab === index
-                        ? "bg-white/20"
-                        : "bg-blue-50"
+                      activeTab === index ? "bg-white/20" : "bg-blue-50"
                     }`}
                   >
                     <Briefcase
                       size={18}
-                      className={
-                        activeTab === index
-                          ? "text-white"
-                          : "text-blue-600"
-                      }
+                      className={activeTab === index ? "text-white" : "text-blue-600"}
                     />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="font-semibold truncate">
-                      {exp.company}
-                    </div>
+                    <div className="font-semibold truncate">{exp.company}</div>
                     <div
-                      className={`text-sm ${activeTab === index ? "text-blue-100" : "text-slate-500"}`}
+                      className={`text-sm ${
+                        activeTab === index ? "text-blue-100" : "text-slate-500"
+                      }`}
                     >
                       {exp.period}
                     </div>
@@ -206,30 +202,19 @@ Accenture | AI Engineer (NLP & GenAI)
               <div className="flex flex-wrap items-center gap-4 text-slate-600">
                 <div className="flex items-center gap-2">
                   <div className="p-1.5 bg-blue-50 rounded-lg">
-                    <Briefcase
-                      size={14}
-                      className="text-blue-600"
-                    />
+                    <Briefcase size={14} className="text-blue-600" />
                   </div>
-                  <span className="font-medium">
-                    {experiences[activeTab].company}
-                  </span>
+                  <span className="font-medium">{experiences[activeTab].company}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="p-1.5 bg-blue-50 rounded-lg">
-                    <Calendar
-                      size={14}
-                      className="text-blue-600"
-                    />
+                    <Calendar size={14} className="text-blue-600" />
                   </div>
                   <span>{experiences[activeTab].period}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="p-1.5 bg-blue-50 rounded-lg">
-                    <MapPin
-                      size={14}
-                      className="text-blue-600"
-                    />
+                    <MapPin size={14} className="text-blue-600" />
                   </div>
                   <span>{experiences[activeTab].location}</span>
                 </div>
@@ -238,27 +223,22 @@ Accenture | AI Engineer (NLP & GenAI)
 
             {/* Responsibilities */}
             <div className="space-y-4">
-              {experiences[activeTab].description.map(
-                (item, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{
-                      duration: 0.3,
-                      delay: index * 0.1,
-                    }}
-                    className="flex gap-4 group"
-                  >
-                    <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center text-white font-semibold text-sm shadow-lg group-hover:scale-110 transition-transform">
-                      {index + 1}
-                    </div>
-                    <p className="text-slate-700 leading-relaxed flex-1 pt-1">
-                      {item}
-                    </p>
-                  </motion.div>
-                ),
-              )}
+              {experiences[activeTab].description.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                  className="flex gap-4 group"
+                >
+                  <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center text-white font-semibold text-sm shadow-lg group-hover:scale-110 transition-transform">
+                    {index + 1}
+                  </div>
+                  <p className="text-slate-700 leading-relaxed flex-1 pt-1">
+                    {item}
+                  </p>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </div>
@@ -266,3 +246,4 @@ Accenture | AI Engineer (NLP & GenAI)
     </section>
   );
 }
+```
