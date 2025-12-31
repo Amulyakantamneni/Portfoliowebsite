@@ -1,21 +1,23 @@
 import { useState } from "react";
+import { motion } from "motion/react";
 
-export default function ContactForm() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+export function Contact() {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
-  const [debug, setDebug] = useState<string>("");
+
+  const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY as string | undefined;
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
-    setDebug("");
 
-    const accessKey = import.meta.env.VITE_WEB3FORMS_KEY as string | undefined;
-    if (!accessKey) {
+    if (!ACCESS_KEY) {
+      console.error("Missing VITE_WEB3FORMS_KEY. Add it in Vercel env vars and redeploy.");
       setStatus("error");
-      setDebug("Missing VITE_WEB3FORMS_KEY in Vercel env vars. Add it and redeploy.");
       return;
     }
 
@@ -24,70 +26,116 @@ export default function ContactForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          access_key: accessKey,
+          access_key: ACCESS_KEY,
           subject: "New message from amulyakantamneni.com",
-          from_name: name,
-          email,
-          message,
+          from_name: form.name,
+          email: form.email,
+          message: form.message,
         }),
       });
 
       const data = await res.json();
-      setDebug(JSON.stringify(data, null, 2));
 
       if (res.ok && data?.success) {
         setStatus("success");
-        setName("");
-        setEmail("");
-        setMessage("");
+        setForm({ name: "", email: "", message: "" });
       } else {
+        console.error("Web3Forms error:", data);
         setStatus("error");
       }
-    } catch (err: any) {
+    } catch (err) {
+      console.error(err);
       setStatus("error");
-      setDebug(err?.message || "Unknown error");
     }
   };
 
   return (
-    <form onSubmit={onSubmit} style={{ maxWidth: 520 }}>
-      <input
-        placeholder="Your name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-        style={{ width: "100%", padding: 12, marginBottom: 12 }}
-      />
-      <input
-        placeholder="Your email"
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-        style={{ width: "100%", padding: 12, marginBottom: 12 }}
-      />
-      <textarea
-        placeholder="Your message"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        required
-        rows={6}
-        style={{ width: "100%", padding: 12, marginBottom: 12 }}
-      />
+    <section id="contact" className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 relative bg-white/60">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-12 text-center"
+        >
+          <h2 className="text-4xl sm:text-5xl text-slate-900">
+            Get In Touch<span className="text-blue-600">.</span>
+          </h2>
+          <p className="mt-4 text-lg text-slate-600">
+            I&apos;m always open to meaningful conversations about AI, product ideas, collaboration, or new opportunities.
+          </p>
+        </motion.div>
 
-      <button type="submit" disabled={status === "sending"} style={{ padding: 12, width: "100%" }}>
-        {status === "sending" ? "Sending..." : "Send Message"}
-      </button>
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
+          {/* LEFT SIDE: keep your cards here if you already have them */}
+          <div className="space-y-6" />
 
-      {status === "success" && <p style={{ color: "green" }}>✅ Sent! I’ll reply soon.</p>}
-      {status === "error" && <p style={{ color: "red" }}>❌ Failed. See debug below.</p>}
+          {/* RIGHT SIDE: form */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="bg-white rounded-2xl border border-slate-200 shadow-xl p-8"
+          >
+            <form onSubmit={onSubmit} className="space-y-5">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Your Name</label>
+                <input
+                  name="name"
+                  value={form.name}
+                  onChange={onChange}
+                  required
+                  className="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500/40"
+                  placeholder="John Doe"
+                />
+              </div>
 
-      {/* This shows exactly what Web3Forms returned, so you don't need DevTools */}
-      {debug && (
-        <pre style={{ marginTop: 12, background: "#f6f6f6", padding: 12, borderRadius: 8 }}>
-          {debug}
-        </pre>
-      )}
-    </form>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Your Email</label>
+                <input
+                  name="email"
+                  type="email"
+                  value={form.email}
+                  onChange={onChange}
+                  required
+                  className="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500/40"
+                  placeholder="john@example.com"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Your Message</label>
+                <textarea
+                  name="message"
+                  value={form.message}
+                  onChange={onChange}
+                  required
+                  rows={6}
+                  className="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500/40"
+                  placeholder="Tell me about your project or opportunity..."
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="w-full rounded-xl px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold hover:shadow-xl hover:shadow-blue-500/30 transition-all disabled:opacity-60"
+              >
+                {status === "sending" ? "Sending..." : "Send Message"}
+              </button>
+
+              {status === "success" && <p className="text-sm text-green-600">✅ Message sent!</p>}
+              {status === "error" && (
+                <p className="text-sm text-red-600">
+                  ❌ Failed. If this keeps happening, your Web3Forms key/env vars aren’t set or you didn’t redeploy.
+                </p>
+              )}
+            </form>
+          </motion.div>
+        </div>
+      </div>
+    </section>
   );
 }
