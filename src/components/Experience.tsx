@@ -61,31 +61,39 @@ Accenture | AI Engineer (NLP & GenAI)
   };
 
   const experiences = [
-    {
-      company: "PayPal",
-      position: "AI / Machine Learning Engineer",
-      period: "2024 – Present",
-      location: "San Jose, CA",
-      description: [
-        "Designed and deployed LLM-powered NLP pipelines for document classification and intelligent search.",
-        "Built Retrieval-Augmented Generation (RAG) systems to improve answer accuracy and reduce hallucinations.",
-        "Worked closely with product and engineering teams to move AI features from prototype to production.",
-        "Improved inference latency and reliability through batching, prompt optimization, and caching strategies.",
-      ],
-    },
-    {
-      company: "Accenture",
-      position: "AI Engineer (NLP & GenAI)",
-      period: "2022 – 2023",
-      location: "Hyderabad, India",
-      description: [
-        "Developed NLP models and ML pipelines for enterprise-scale data processing and automation.",
-        "Implemented text classification and information extraction solutions using transformer-based models.",
-        "Collaborated with cross-functional teams to integrate AI services into existing systems.",
-        "Contributed to improving model performance, monitoring, and deployment workflows.",
-      ],
-    },
-  ];
+  {
+    company: "PayPal",
+    position: "AI / Machine Learning Engineer",
+    period: "2024 – Present",
+    location: "San Jose, CA",
+    description: [
+      "Owned end-to-end development of LLM-powered document understanding features (ingestion → chunking → embeddings → vector indexing → orchestration → UI/API integration).",
+      "Built Retrieval-Augmented Generation (RAG) workflows with hybrid retrieval (dense + keyword), reranking, and grounded prompting to improve answer relevance and reduce hallucinations.",
+      "Designed scalable inference services with FastAPI, async workers, caching, and streaming responses; tuned batching and request concurrency to improve throughput and reduce P95 latency.",
+      "Implemented evaluation & regression testing for prompts and retrieval (golden sets, win-rate comparisons, citation checks, safety filters) to prevent quality drops across releases.",
+      "Productionized NLP/LLM pipelines using Docker and Kubernetes and automated releases with CI/CD; added observability (logs/metrics/traces) for reliable on-call debugging.",
+      "Collaborated with product and platform teams to convert prototypes into shippable features, define success metrics, and iterate using user feedback and error analysis.",
+      "Built internal tooling for prompt/version management and data quality checks, enabling faster iteration across multiple teams and reducing manual debugging cycles.",
+      "Hardened systems with fallback strategies (retry policies, retrieval backoff, deterministic templates) to maintain reliability during partial outages and noisy inputs.",
+    ],
+  },
+  {
+    company: "Accenture",
+    position: "AI Engineer (NLP & GenAI)",
+    period: "2022 – 2023",
+    location: "Hyderabad, India",
+    description: [
+      "Delivered NLP and GenAI solutions for enterprise clients across banking and insurance—information extraction, classification, summarization, and semantic search.",
+      "Built transformer-based pipelines (tokenization, training/inference, post-processing) and improved quality through prompt tuning, thresholding, and error-driven iterations.",
+      "Developed early RAG prototypes using LangChain/Hugging Face embeddings with FAISS/Qdrant, improving internal knowledge lookup speed and reducing manual search effort.",
+      "Implemented secure AI microservices (FastAPI) with authentication, rate limiting, and structured logging to support multi-tenant deployments and audit requirements.",
+      "Integrated models into client cloud environments (AWS services like Lambda/ECS/S3/CloudWatch), supporting stable rollouts and operational monitoring.",
+      "Created reusable data preprocessing and labeling workflows to improve dataset consistency, reduce noise, and speed up experimentation cycles.",
+      "Partnered with client engineering teams to translate business workflows into ML-ready pipelines and ship production features under tight timelines.",
+    ],
+  },
+];
+
 
   return (
     <section
