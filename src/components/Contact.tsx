@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { motion } from "motion/react";
+import { Mail, Linkedin, Github, MessageSquare } from "lucide-react";
 
 export function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">(
+    "idle",
+  );
 
   const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY as string | undefined;
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const onChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
@@ -16,7 +21,9 @@ export function Contact() {
     setStatus("sending");
 
     if (!ACCESS_KEY) {
-      console.error("Missing VITE_WEB3FORMS_KEY. Add it in Vercel env vars and redeploy.");
+      console.error(
+        "Missing VITE_WEB3FORMS_KEY. Add it in Vercel env vars and redeploy.",
+      );
       setStatus("error");
       return;
     }
@@ -50,8 +57,12 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 relative bg-white/60">
+    <section
+      id="contact"
+      className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 relative bg-white/60"
+    >
       <div className="max-w-7xl mx-auto">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -63,13 +74,84 @@ export function Contact() {
             Get In Touch<span className="text-blue-600">.</span>
           </h2>
           <p className="mt-4 text-lg text-slate-600">
-            I&apos;m always open to meaningful conversations about AI, product ideas, collaboration, or new opportunities.
+            I&apos;m always open to meaningful conversations about AI, product
+            ideas, collaboration, or new opportunities.
           </p>
         </motion.div>
 
+        {/* Two-column layout */}
         <div className="grid lg:grid-cols-2 gap-8 items-start">
-          {/* LEFT SIDE: keep your cards here if you already have them */}
-          <div className="space-y-6" />
+          {/* LEFT SIDE: buttons/cards */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="space-y-6"
+          >
+            {/* Email card */}
+            <motion.a
+              href="mailto:amulya.kantamneni@gmail.com"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="block bg-white rounded-2xl border border-slate-200 shadow-lg p-6 hover:shadow-xl transition-all"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center shadow-md">
+                  <Mail className="text-white" size={20} />
+                </div>
+                <div className="min-w-0">
+                  <div className="text-slate-900 font-semibold">Email Me</div>
+                  <div className="text-slate-600 text-sm truncate">
+                    amulya.kantamneni@gmail.com
+                  </div>
+                </div>
+              </div>
+            </motion.a>
+
+            {/* Connect Online card */}
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-lg p-6">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center shadow-md">
+                  <MessageSquare className="text-white" size={20} />
+                </div>
+
+                <div className="flex-1">
+                  <div className="text-slate-900 font-semibold">
+                    Connect Online
+                  </div>
+
+                  <div className="mt-3 space-y-3">
+                    <motion.a
+                      href="https://linkedin.com/in/amulyachk"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ x: 4 }}
+                      className="flex items-center gap-3 text-slate-700 hover:text-blue-700 transition-colors"
+                    >
+                      <span className="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center">
+                        <Linkedin size={16} className="text-blue-600" />
+                      </span>
+                      <span className="text-sm font-medium">LinkedIn</span>
+                    </motion.a>
+
+                    <motion.a
+                      href="https://github.com/Amulyakantamneni"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ x: 4 }}
+                      className="flex items-center gap-3 text-slate-700 hover:text-slate-900 transition-colors"
+                    >
+                      <span className="w-7 h-7 rounded-lg bg-slate-100 flex items-center justify-center">
+                        <Github size={16} className="text-slate-800" />
+                      </span>
+                      <span className="text-sm font-medium">GitHub</span>
+                    </motion.a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
 
           {/* RIGHT SIDE: form */}
           <motion.div
@@ -81,7 +163,9 @@ export function Contact() {
           >
             <form onSubmit={onSubmit} className="space-y-5">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Your Name</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  Your Name
+                </label>
                 <input
                   name="name"
                   value={form.name}
@@ -93,7 +177,9 @@ export function Contact() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Your Email</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  Your Email
+                </label>
                 <input
                   name="email"
                   type="email"
@@ -106,7 +192,9 @@ export function Contact() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Your Message</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  Your Message
+                </label>
                 <textarea
                   name="message"
                   value={form.message}
@@ -126,10 +214,12 @@ export function Contact() {
                 {status === "sending" ? "Sending..." : "Send Message"}
               </button>
 
-              {status === "success" && <p className="text-sm text-green-600">✅ Message sent!</p>}
+              {status === "success" && (
+                <p className="text-sm text-green-600">✅ Message sent!</p>
+              )}
               {status === "error" && (
                 <p className="text-sm text-red-600">
-                  ❌ Failed. If this keeps happening, your Web3Forms key/env vars aren’t set or you didn’t redeploy.
+                  ❌ Failed to send. Please try again or email me directly.
                 </p>
               )}
             </form>
