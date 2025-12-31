@@ -245,4 +245,3 @@ Accenture | AI Engineer (NLP & GenAI)
     </section>
   );
 }
-```
