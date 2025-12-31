@@ -1,15 +1,16 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* Design tokens / shadcn-style CSS variables */
+/* Optional (Tailwind v4 sources). Keep if you want. */
+@source "../index.html";
+@source "./**/*.{js,ts,jsx,tsx}";
+
 :root {
   --font-size: 16px;
 
-  --background: #fff;
+  --background: #ffffff;
   --foreground: oklch(0.145 0 0);
 
-  --card: #fff;
+  --card: #ffffff;
   --card-foreground: oklch(0.145 0 0);
 
   --popover: oklch(1 0 0);
@@ -28,14 +29,15 @@
   --accent-foreground: #030213;
 
   --destructive: #d4183d;
-  --destructive-foreground: #fff;
+  --destructive-foreground: #ffffff;
 
   --border: #0000001a;
   --input: transparent;
   --input-background: #f3f3f5;
-  --switch-background: #cbced4;
 
+  --switch-background: #cbced4;
   --ring: oklch(0.708 0 0);
+
   --radius: 0.625rem;
 }
 
@@ -64,20 +66,20 @@
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.985 0 0);
 
-  --border: oklch(0.269 0 0 / 0.6);
-  --input: oklch(0.269 0 0 / 0.5);
+  --border: oklch(0.269 0 0);
+  --input: transparent;
   --input-background: oklch(0.205 0 0);
-  --switch-background: oklch(0.269 0 0);
 
+  --switch-background: oklch(0.269 0 0);
   --ring: oklch(0.708 0 0);
 }
 
-html,
-body {
+html {
   font-size: var(--font-size);
 }
 
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
 }
