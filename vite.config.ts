@@ -6,15 +6,15 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
+      "@": path.resolve(__dirname, "./src")
+    }
   },
   build: {
     target: "esnext",
-    outDir: "dist",
+    outDir: "dist"
   },
   server: {
     port: 3000,
-    open: true,
-  },
+    open: true
+  }
 });
