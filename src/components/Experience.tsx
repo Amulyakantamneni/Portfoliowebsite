@@ -63,7 +63,7 @@ Accenture | AI Engineer (NLP & GenAI)
   const experiences = [
   {
     company: "PayPal",
-    position: "AI / Machine Learning Engineer",
+    position: "AI Machine Learning Engineer",
     period: "2024 – Present",
     location: "San Jose, CA",
     description: [
@@ -79,7 +79,7 @@ Accenture | AI Engineer (NLP & GenAI)
   },
   {
     company: "Accenture",
-    position: "AI Engineer (NLP & GenAI)",
+    position: "AI Engineer (GenAI)",
     period: "2022 – 2023",
     location: "Hyderabad, India",
     description: [
