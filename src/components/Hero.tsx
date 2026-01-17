@@ -150,7 +150,7 @@ export function Hero() {
             </a>
 
             <a
-              href="https://linkedin.com/in/amulyachk"
+              href="www.linkedin.com/in/amulya-kantamneni-6201543a5"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
