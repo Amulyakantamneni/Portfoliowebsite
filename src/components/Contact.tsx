@@ -123,7 +123,7 @@ export function Contact() {
 
                   <div className="mt-3 space-y-3">
                     <motion.a
-                      href="www.linkedin.com/in/amulya-kantamneni-6201543a5"
+                      href="https://www.linkedin.com/in/amulya-kantamneni-6201543a5"
                       target="_blank"
                       rel="noopener noreferrer"
                       whileHover={{ x: 4 }}
